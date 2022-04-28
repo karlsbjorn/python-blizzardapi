@@ -169,6 +169,18 @@ class TestWowGameDataApi:
             params=params,
         )
 
+    def test_search_connected_realms(self, success_response_mock):
+        self.api.wow.game_data.search_connected_realms("us", "en_US")
+        params = {
+            "namespace": "dynamic-us",
+            "locale": "en_US",
+            "access_token": "access_token",
+        }
+        success_response_mock.assert_called_with(
+            "https://us.api.blizzard.com/data/wow/search/connected-realm",
+            params=params,
+        )
+
     # Creature API
 
     def test_get_creature_families_index(self, success_response_mock):

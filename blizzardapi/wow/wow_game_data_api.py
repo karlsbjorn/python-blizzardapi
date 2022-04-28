@@ -108,6 +108,13 @@ class WowGameDataApi(Api):
         query_params = {"namespace": namespace, "locale": locale}
         return super().get_resource(resource, region, query_params)
 
+    def search_connected_realms(self, region, locale, is_classic=False):
+        """Search for connected realms."""
+        resource = "/data/wow/search/connected-realm"
+        namespace = f"dynamic-classic-{region}" if is_classic else f"dynamic-{region}"
+        query_params = {"namespace": namespace, "locale": locale}
+        return super().get_resource(resource, region, query_params)
+
     # Creature API
 
     def get_creature_families_index(self, region, locale, is_classic=False):
