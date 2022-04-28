@@ -108,7 +108,7 @@ class WowGameDataApi(Api):
         query_params = {"namespace": namespace, "locale": locale}
         return super().get_resource(resource, region, query_params)
 
-    def search_connected_realms(self, region, locale, is_classic=False):
+    def get_connected_realms_search(self, region, locale, is_classic=False):
         """Search for connected realms."""
         resource = "/data/wow/search/connected-realm"
         namespace = f"dynamic-classic-{region}" if is_classic else f"dynamic-{region}"
@@ -246,6 +246,12 @@ class WowGameDataApi(Api):
         resource = f"/data/wow/media/item/{item_id}"
         namespace = f"static-classic-{region}" if is_classic else f"static-{region}"
         query_params = {"namespace": namespace, "locale": locale}
+        return super().get_resource(resource, region, query_params)
+
+    def get_item_search(self, region, locale, item_name, is_classic=False):
+        resource = "/data/wow/search/item"
+        namespace = f"static-classic-{region}" if is_classic else f"static-{region}"
+        query_params = {"namespace": namespace, f"name.{locale}": item_name}
         return super().get_resource(resource, region, query_params)
 
     # Journal API

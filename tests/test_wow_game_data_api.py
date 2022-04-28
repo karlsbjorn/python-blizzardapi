@@ -170,7 +170,7 @@ class TestWowGameDataApi:
         )
 
     def test_search_connected_realms(self, success_response_mock):
-        self.api.wow.game_data.search_connected_realms("us", "en_US")
+        self.api.wow.game_data.get_connected_realms_search("us", "en_US")
         params = {
             "namespace": "dynamic-us",
             "locale": "en_US",
@@ -384,6 +384,18 @@ class TestWowGameDataApi:
         }
         success_response_mock.assert_called_with(
             "https://us.api.blizzard.com/data/wow/media/item/9999",
+            params=params,
+        )
+
+    def test_item_search(self, success_response_mock):
+        self.api.wow.game_data.get_item_search("us", "en_US", "Garrosh")
+        params = {
+            "namespace": "static-us",
+            "name.en_US": "Garrosh",
+            "access_token": "access_token",
+        }
+        success_response_mock.assert_called_with(
+            "https://us.api.blizzard.com/data/wow/search/item",
             params=params,
         )
 
