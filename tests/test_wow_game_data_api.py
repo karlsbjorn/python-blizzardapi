@@ -143,6 +143,18 @@ class TestWowGameDataApi:
             params=params,
         )
 
+    def test_get_azerite_essence_search(self, success_response_mock):
+        self.api.wow.game_data.get_azerite_essence_search("us", "en_US", "Vision of Perfection")
+        params = {
+            "namespace": "static-us",
+            "name.en_US": "Vision of Perfection",
+            "access_token": "access_token",
+        }
+        success_response_mock.assert_called_with(
+            "https://us.api.blizzard.com/data/wow/search/azerite-essence",
+            params=params,
+        )
+
     # Connected Realm API
 
     def test_get_connected_realms_index(self, success_response_mock):

@@ -92,6 +92,13 @@ class WowGameDataApi(Api):
         query_params = {"namespace": f"static-{region}", "locale": locale}
         return super().get_resource(resource, region, query_params)
 
+    def get_azerite_essence_search(self, region, locale, name):
+        """Return azerite essences by name."""
+        resource = "/data/wow/search/azerite-essence"
+        namespace = f"static-{region}"
+        query_params = {"namespace": namespace, f"name.{locale}": name}
+        return super().get_resource(resource, region, query_params)
+
     # Connected Realm API
 
     def get_connected_realms_index(self, region, locale, is_classic=False):
@@ -109,7 +116,7 @@ class WowGameDataApi(Api):
         return super().get_resource(resource, region, query_params)
 
     def get_connected_realms_search(self, region, locale, is_classic=False):
-        """Search for connected realms."""
+        """Return connected realms."""
         resource = "/data/wow/search/connected-realm"
         namespace = f"dynamic-classic-{region}" if is_classic else f"dynamic-{region}"
         query_params = {"namespace": namespace, "locale": locale}
@@ -249,6 +256,7 @@ class WowGameDataApi(Api):
         return super().get_resource(resource, region, query_params)
 
     def get_item_search(self, region, locale, item_name, is_classic=False):
+        """Return items by name."""
         resource = "/data/wow/search/item"
         namespace = f"static-classic-{region}" if is_classic else f"static-{region}"
         query_params = {"namespace": namespace, f"name.{locale}": item_name}
