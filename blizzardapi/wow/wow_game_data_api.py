@@ -115,11 +115,17 @@ class WowGameDataApi(Api):
         query_params = {"namespace": namespace, "locale": locale}
         return super().get_resource(resource, region, query_params)
 
-    def get_connected_realms_search(self, region, locale, is_classic=False):
+    def get_connected_realms_search(
+        self, region, locale, page_size=100, is_classic=False
+    ):
         """Return connected realms."""
         resource = "/data/wow/search/connected-realm"
         namespace = f"dynamic-classic-{region}" if is_classic else f"dynamic-{region}"
-        query_params = {"namespace": namespace, "locale": locale}
+        query_params = {
+            "namespace": namespace,
+            "locale": locale,
+            "_pageSize": page_size,
+        }
         return super().get_resource(resource, region, query_params)
 
     # Creature API
@@ -255,11 +261,17 @@ class WowGameDataApi(Api):
         query_params = {"namespace": namespace, "locale": locale}
         return super().get_resource(resource, region, query_params)
 
-    def get_item_search(self, region, locale, item_name, is_classic=False):
+    def get_item_search(
+        self, region, locale, item_name, page_size=100, is_classic=False
+    ):
         """Return items by name."""
         resource = "/data/wow/search/item"
         namespace = f"static-classic-{region}" if is_classic else f"static-{region}"
-        query_params = {"namespace": namespace, f"name.{locale}": item_name}
+        query_params = {
+            "namespace": namespace,
+            f"name.{locale}": item_name,
+            "_pageSize": page_size,
+        }
         return super().get_resource(resource, region, query_params)
 
     # Journal API
