@@ -144,7 +144,9 @@ class TestWowGameDataApi:
         )
 
     def test_get_azerite_essence_search(self, success_response_mock):
-        self.api.wow.game_data.get_azerite_essence_search("us", "en_US", "Vision of Perfection")
+        self.api.wow.game_data.get_azerite_essence_search(
+            "us", "en_US", "Vision of Perfection"
+        )
         params = {
             "namespace": "static-us",
             "name.en_US": "Vision of Perfection",
